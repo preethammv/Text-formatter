@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { FaFileDownload, FaCopy } from "react-icons/fa";
 
@@ -7,6 +7,9 @@ export default function TextFormatter() {
   const [readTime, setReadTime] = useState(0);
   const [wordCount, setWordCount] = useState(0);
   const [copyText, setCopyText] = useState("");
+
+
+  
   const [textwarn, setTextWarn] = useState("");
 
   const handleText = (e) => {
@@ -49,22 +52,22 @@ export default function TextFormatter() {
 
   //download file
   const downloadFile = () => {
-    if (text != "") {
+    if (text !== " ") {
       const link = document.createElement("a");
       const blob = new Blob([text], { type: "text/plain" });
       link.href = URL.createObjectURL(blob);
       link.download = "textformatter.txt";
       //   document.body.appendChild(link);
       link.click();
-    } else {
-      setTextWarn("No text to download");
-      setTimeout(() => {
-        let get = textwarn;
-        get.style.visibility = "hidden";
-      }, 3000);
+    } else  {
+        setTextWarn("No text to download");
+        setTimeout(() => {
+            let get = textwarn;
+            get.style.visibility = 'hidden';
+            }, 3000);
     }
   };
-
+  
   //copy text
   const copy = () => {
     navigator.clipboard.writeText(copyText);
